@@ -1,10 +1,10 @@
 require('dotenv').config();
 const express = require('express');
-//const connectDB = require('./config/db');
-//const userRoutes = require('./routes/user');
-//const postRoutes = require('./routes/post');
+const connectDB = require('./config/db');
+const userRoutes = require('./routes/user');
+const postRoutes = require('./routes/post');
 
-//connectDB();
+connectDB();
 
 const app = express();
 app.use(express.json());
@@ -20,14 +20,11 @@ const cors = require('cors');
 app.use(cors()); 
 
 // routes
-//app.use('/api/users', userRoutes);
-//app.use('/api/posts', postRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/posts', postRoutes);
 
 app.get('/', (req, res) => {
     res.send("Hello world");
-});
-app.get('/v', (req,res) => {
-    res.send(process.env.MONGO_URL);
 });
 
 // RUNRUNRUN
