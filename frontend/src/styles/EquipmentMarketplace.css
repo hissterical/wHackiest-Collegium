@@ -1,7 +1,7 @@
 /* Gradient for the entire container */
 .equipment-marketplace-container {
   min-height: 100vh;  /* Ensure the gradient covers the entire screen height */
-  background: linear-gradient(135deg, #bdc3c7  , #2c3e50);  /* Blue to light gray gradient */
+  background: linear-gradient(135deg, #6a11cb, #2575fc);  /* Blue to light gray gradient */
   padding: 20px;
   text-align: center;
   display: flex;

@@ -1,7 +1,7 @@
 /* Styling for the expertise marketplace container */
 .expertise-marketplace-container {
   min-height: 100vh;
-  background: linear-gradient(135deg, #bdc3c7, #2c3e50);
+  background: linear-gradient(135deg,#6a11cb, #2575fc);
   padding: 20px;
   text-align: center;
   display: flex;
