@@ -3,12 +3,9 @@
   "builds": [
     { "src": "src/app.js", "use": "@vercel/node" }
   ],
-  "routes": [
-    { "src": "/(.*)", "dest": "src/app.js" }
-  ],
   "headers": [
     {
-      "source": "/api/(.*)", 
+      "source": "/api/(.*)",
       "headers": [
         {
           "key": "Access-Control-Allow-Origin",
