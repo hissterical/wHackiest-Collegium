@@ -45,6 +45,11 @@ router.post('/register', async (req, res) => {
         res.status(500).send('Server error');
     }
 });
+router.get('/register', async(req, res) => {
+    let user = await User.find();
+    res.json(user);
+
+})
 
 // Login route
 router.post('/login', async (req, res) => {

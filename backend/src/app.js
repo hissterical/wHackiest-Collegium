@@ -33,6 +33,7 @@
 //     console.log(`Server running on port ${PORT}`)
 // });
 
+
 require('dotenv').config();
 const express = require('express');
 const connectDB = require('./config/db');
@@ -47,12 +48,22 @@ const app = express();
 app.use(express.json());
 
 // CORS Configuration (allow all origins)
-app.use(cors({
-  origin: '*',  // Allow all origins (you can replace * with a specific domain for better security)
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allowed HTTP methods
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-CSRF-Token', 'X-Requested-With'], // Allowed headers
-  credentials: true  // Allow credentials
-}));
+app.use(async (req, res, next) => {
+  res.setHeader('Access-Control-Allow-Credentials', true)
+  res.setHeader('Access-Control-Allow-Origin', '*')
+  // another common pattern
+  // res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
+  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT')
+  res.setHeader(
+    'Access-Control-Allow-Headers',
+    'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
+  )
+  if (req.method === 'OPTIONS') {
+    res.status(200).end();
+    return;
+  }
+  next()
+});
 
 // Routes
 app.use('/api/users', userRoutes);
@@ -68,3 +79,4 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
