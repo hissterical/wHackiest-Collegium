@@ -17,7 +17,6 @@ function Dashboard() {
 
   // Mock API call to fetch data
   useEffect(() => {
-    // Simulate fetching data from an API
     const fetchData = async () => {
       const mockNotifications = [
         "Event registration confirmed for Hackathon.",
@@ -43,10 +42,7 @@ function Dashboard() {
     <div className="dashboard-container">
       {/* Top Navigation Bar */}
       <header className="top-nav">
-        <div
-          className="profile-avatar"
-          onClick={() => navigate("/profile")}
-        >
+        <div className="profile-avatar" onClick={() => navigate("/profile")}>
           <img src="https://via.placeholder.com/40" alt="Profile" />
         </div>
         <div className="notifications">
@@ -64,7 +60,7 @@ function Dashboard() {
             <div
               key={index}
               className="card"
-              onClick={() => navigate(link.path)} // Use navigate properly
+              onClick={() => navigate(link.path)}
             >
               {link.title}
             </div>
@@ -77,15 +73,18 @@ function Dashboard() {
           <p>Recent Transactions: {highlights.recentTransactions}</p>
           <p>Activity Summary: {highlights.activitySummary}</p>
         </section>
-
       </main>
 
       {/* Bottom Navigation Bar */}
       <footer className="bottom-nav">
-        <button onClick={() => navigate("/")}>🏠 Dashboard</button>
-        <button onClick={() => navigate("/marketplace")}>📦 Marketplace</button>
+        <button onClick={() => navigate("/dashboard")}>🏠 Dashboard</button>
+        <button onClick={() => navigate("/expertise-marketplace")}>
+          📦 Knowledge Marketplace
+        </button>
         <button onClick={() => navigate("/calendar")}>📅 Calendar</button>
-        <button onClick={() => navigate("/chats")}>💬 Chats</button>
+        <button onClick={() => navigate("/event-management")}>
+          💬 Events
+        </button>
       </footer>
     </div>
   );
