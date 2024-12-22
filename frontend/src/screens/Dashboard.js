@@ -15,6 +15,9 @@ function Dashboard() {
     { title: "Upcoming Events", path: "/event-management" },
   ]);
 
+  // Dark mode state
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
   // Mock API call to fetch data
   useEffect(() => {
     const fetchData = async () => {
@@ -38,8 +41,13 @@ function Dashboard() {
     fetchData();
   }, []);
 
+  // Toggle dark mode
+  const toggleDarkMode = () => {
+    setIsDarkMode((prevMode) => !prevMode);
+  };
+
   return (
-    <div className="dashboard-container">
+    <div className={`dashboard-container ${isDarkMode ? "dark-theme" : "light-theme"}`}>
       {/* Top Navigation Bar */}
       <header className="top-nav">
         <div className="profile-avatar" onClick={() => navigate("/profile")}>
@@ -49,6 +57,10 @@ function Dashboard() {
           <span className="notification-icon">🔔</span>
           <span className="notification-badge">{notifications.length}</span>
         </div>
+        {/* Dark Mode Toggle */}
+        <button className="toggle-dark-mode" onClick={toggleDarkMode}>
+          {isDarkMode ? "🌞 Light Mode" : "🌙 Dark Mode"}
+        </button>
       </header>
 
       {/* Main Content */}
