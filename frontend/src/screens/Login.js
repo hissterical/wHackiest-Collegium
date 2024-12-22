@@ -1,36 +1,44 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import '../styles/Login.css';
-
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [roles, setRoles] = useState([]);
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-  const handleCheckboxChange = (e) => {
-    const value = e.target.value;
-    if (roles.includes(value)) {
-      setRoles(roles.filter((role) => role !== value)); // Uncheck the role
-    } else {
-      setRoles([...roles, value]); // Add the role
-    }
-  };
-
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     if (!email || !password) {
       setError("Please fill in both email and password.");
       return;
     }
-    if (roles.length === 0) {
-      setError("Please select at least one role.");
-      return;
-    }
-    setError(""); // Clear any previous errors
+    setError("");
 
-    console.log("Logging in with:", { email, password, roles });
-    // Handle login logic (API call)
+    const payload = { email, password };
+
+    try {
+      const response = await fetch("https://w-hackiest-collegium-git-main-draxs-projects-939fc184.vercel.app/api/users/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        throw new Error("Login failed. Please check your credentials.");
+      }
+
+      const data = await response.json();
+      localStorage.setItem("user", JSON.stringify({ _id: data._id, name: data.name }));
+      navigate("/dashboard");
+
+    } catch (err) {
+      setError(err.message);
+    }
   };
 
   return (
@@ -56,45 +64,15 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          <div className="input-group">
-            <label>Select Roles:</label>
-            <div className="checkbox-group">
-              <label>
-                <input
-                  type="checkbox"
-                  value="student"
-                  onChange={handleCheckboxChange}
-                />
-                Student
-              </label>
-              <label>
-                <input
-                  type="checkbox"
-                  value="tutor"
-                  onChange={handleCheckboxChange}
-                />
-                Tutor
-              </label>
-              <label>
-                <input
-                  type="checkbox"
-                  value="vendor"
-                  onChange={handleCheckboxChange}
-                />
-                Vendor
-              </label>
-            </div>
-          </div>
           {error && <div className="error">{error}</div>}
           <button type="submit" className="login-button">
-
             Login
           </button>
         </form>
         <div className="links">
-          <a href="/forgot-password">Forgot Password?</a>
+          <Link to="/forgot-password">Forgot Password?</Link>
           <p>
-            New here? <a href="/signup">Sign Up</a>
+            New here? <Link to="/signup">Sign Up</Link>
           </p>
         </div>
       </div>
@@ -103,4 +81,3 @@ const Login = () => {
 };
 
 export default Login;
-

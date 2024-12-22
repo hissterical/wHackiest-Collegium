@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "../styles/Dashboard.css";
 
 function Dashboard() {
+  const navigate = useNavigate();
+
   // State for dynamic data
   const [notifications, setNotifications] = useState([]);
   const [highlights, setHighlights] = useState({});
-  const [quickLinks, setQuickLinks] = useState([
-    { title: "Knowledge Marketplace", action: "Go to Knowledge Marketplace" },
-    { title: "Equipment Marketplace", action: "Go to Equipment Marketplace" },
-    { title: "Today's Timetable", action: "View Today's Timetable" },
-    { title: "Upcoming Events", action: "Check Upcoming Events" },
+  const [quickLinks] = useState([
+    { title: "Knowledge Marketplace", path: "/expertise-marketplace" },
+    { title: "Equipment Marketplace", path: "/equipment-marketplace" },
+    { title: "Today's Timetable", path: "/calendar" },
+    { title: "Upcoming Events", path: "/event-management" },
   ]);
 
   // Mock API call to fetch data
   useEffect(() => {
-    // Simulate fetching data from an API
     const fetchData = async () => {
       const mockNotifications = [
         "Event registration confirmed for Hackathon.",
@@ -40,10 +42,7 @@ function Dashboard() {
     <div className="dashboard-container">
       {/* Top Navigation Bar */}
       <header className="top-nav">
-        <div
-          className="profile-avatar"
-          onClick={() => alert("Redirect to Profile Settings")}
-        >
+        <div className="profile-avatar" onClick={() => navigate("/profile")}>
           <img src="https://via.placeholder.com/40" alt="Profile" />
         </div>
         <div className="notifications">
@@ -61,7 +60,7 @@ function Dashboard() {
             <div
               key={index}
               className="card"
-              onClick={() => alert(link.action)}
+              onClick={() => navigate(link.path)}
             >
               {link.title}
             </div>
@@ -74,29 +73,18 @@ function Dashboard() {
           <p>Recent Transactions: {highlights.recentTransactions}</p>
           <p>Activity Summary: {highlights.activitySummary}</p>
         </section>
-
-        {/* Notifications Panel */}
-        <section className="notifications-panel">
-          <h2>Notifications</h2>
-          <ul>
-            {notifications.map((notification, index) => (
-              <li key={index}>{notification}</li>
-            ))}
-          </ul>
-          <button onClick={() => alert("View All Notifications")}>
-            View All
-          </button>
-        </section>
       </main>
 
       {/* Bottom Navigation Bar */}
       <footer className="bottom-nav">
-        <button onClick={() => alert("Go to Home")}>🏠 Dashboard</button>
-        <button onClick={() => alert("Go to Marketplace")}>
-          📦 Marketplace
+        <button onClick={() => navigate("/dashboard")}>🏠 Dashboard</button>
+        <button onClick={() => navigate("/expertise-marketplace")}>
+          📦 Knowledge Marketplace
         </button>
-        <button onClick={() => alert("Open Calendar")}>📅 Calendar</button>
-        <button onClick={() => alert("Go to Chats")}>💬 Chats</button>
+        <button onClick={() => navigate("/calendar")}>📅 Calendar</button>
+        <button onClick={() => navigate("/event-management")}>
+          💬 Events
+        </button>
       </footer>
     </div>
   );
