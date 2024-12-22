@@ -1,38 +1,41 @@
-import React, { useState } from 'react';
-import '../styles/ExpertiseMarketplace.css';
+import React, { useState } from "react";
+import "../styles/ExpertiseMarketplace.css";
 
 const ExpertiseMarketplace = () => {
   const [requests, setRequests] = useState([
     {
       id: 1,
-      title: 'Need Help with Math Homework',
-      description: 'Looking for help with calculus problems.',
+      title: "Need Help with Math Homework",
+      description: "Looking for help with calculus problems.",
       budget: 50,
-      type: 'Math',
+      type: "Math",
+      createdByMe: false,
     },
     {
       id: 2,
-      title: 'Assist with Research Paper',
-      description: 'Looking for assistance in writing a research paper.',
+      title: "Assist with Research Paper",
+      description: "Looking for assistance in writing a research paper.",
       budget: 200,
-      type: 'Writing',
+      type: "Writing",
+      createdByMe: false,
     },
     {
       id: 3,
-      title: 'Language Tutoring',
-      description: 'Looking for a tutor for French language.',
+      title: "Language Tutoring",
+      description: "Looking for a tutor for French language.",
       budget: 30,
-      type: 'Language',
+      type: "Language",
+      createdByMe: false,
     },
-    // Add more requests with different types as needed
   ]);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedType, setSelectedType] = useState('All'); // 'All' means no filter
+
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedType, setSelectedType] = useState("All"); // 'All' means no filter
   const [newRequest, setNewRequest] = useState({
-    title: '',
-    description: '',
-    budget: '',
-    type: 'Math', // Default type
+    title: "",
+    description: "",
+    budget: "",
+    type: "Math", // Default type
   });
   const [showModal, setShowModal] = useState(false);
 
@@ -48,14 +51,17 @@ const ExpertiseMarketplace = () => {
     const { name, value } = e.target;
     setNewRequest((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const handleSubmitRequest = (e) => {
     e.preventDefault();
-    setRequests([...requests, { ...newRequest, id: requests.length + 1 }]);
-    setNewRequest({ title: '', description: '', budget: '', type: 'Math' });
+    setRequests([
+      ...requests,
+      { ...newRequest, id: requests.length + 1, createdByMe: true },
+    ]);
+    setNewRequest({ title: "", description: "", budget: "", type: "Math" });
     setShowModal(false);
   };
 
@@ -67,9 +73,16 @@ const ExpertiseMarketplace = () => {
     setShowModal(false);
   };
 
+  const handleCancelRequest = (id) => {
+    setRequests((prevRequests) =>
+      prevRequests.filter((request) => request.id !== id)
+    );
+  };
+
   const filteredRequests = requests.filter((request) => {
     const matchesSearch = request.title.toLowerCase().includes(searchQuery);
-    const matchesType = selectedType === 'All' || request.type === selectedType;
+    const matchesType =
+      selectedType === "All" || request.type === selectedType;
     return matchesSearch && matchesType;
   });
 
@@ -85,7 +98,11 @@ const ExpertiseMarketplace = () => {
         className="search-input"
       />
 
-      <select onChange={handleTypeChange} value={selectedType} className="filter-select">
+      <select
+        onChange={handleTypeChange}
+        value={selectedType}
+        className="filter-select"
+      >
         <option value="All">All Types</option>
         <option value="Math">Math</option>
         <option value="Writing">Writing</option>
@@ -101,9 +118,22 @@ const ExpertiseMarketplace = () => {
             <div key={request.id} className="request-card">
               <h3>{request.title}</h3>
               <p>{request.description}</p>
-              <p><strong>Budget:</strong> {request.budget}Rs</p>
-              <p><strong>Type:</strong> {request.type}</p>
-              <button>Contact</button>
+              <p>
+                <strong>Budget:</strong> {request.budget}Rs
+              </p>
+              <p>
+                <strong>Type:</strong> {request.type}
+              </p>
+              {request.createdByMe ? (
+                <button
+                  className="cancel-btn"
+                  onClick={() => handleCancelRequest(request.id)}
+                >
+                  Cancel
+                </button>
+              ) : (
+                <button>Contact</button>
+              )}
             </div>
           ))
         ) : (
@@ -151,7 +181,9 @@ const ExpertiseMarketplace = () => {
                 {/* Add more options based on available types */}
               </select>
               <button type="submit">Create Request</button>
-              <button type="button" onClick={handleCloseModal}>Cancel</button>
+              <button type="button" onClick={handleCloseModal}>
+                Cancel
+              </button>
             </form>
           </div>
         </div>

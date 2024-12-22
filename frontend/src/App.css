@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+/* App.css */
+.app.light-theme {
+  background: linear-gradient(135deg, #ffffff, #e0e0e0); /* Light theme */
+}
+
+.app.dark-theme {
+  background: linear-gradient(135deg, #000000, #2c2c2c); /* Dark theme */
+}
