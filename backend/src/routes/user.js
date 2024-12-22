@@ -6,7 +6,7 @@ const router = express.Router();
 
 // Register route
 router.post('/register', async (req, res) => {
-    const { email, password, usn, name } = req.body;
+    const { email, password, name } = req.body;
 
     try {
         // Check if the user already exists
@@ -23,7 +23,6 @@ router.post('/register', async (req, res) => {
         user = new User({
             email,
             password: hashedPassword,  // Store the hashed password
-            usn,
             name
         });
 
@@ -39,7 +38,6 @@ router.post('/register', async (req, res) => {
             user: {
                 id: user._id,
                 name: user.name,
-                usn: user.usn
             }
         });
     } catch (error) {
@@ -75,7 +73,6 @@ router.post('/login', async (req, res) => {
             user: {
                 id: user._id,
                 name: user.name,
-                usn: user.usn
             }
         });
     } catch (error) {
