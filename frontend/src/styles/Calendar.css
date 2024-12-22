@@ -1,24 +1,41 @@
+/* Calendar Page Container with Gradient Background */
 .calendar-page {
+  min-height: 100vh; /* Full viewport height */
   padding: 20px;
   font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #bdc3c7, #2c3e50); /* Gradient background */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
 }
 
+/* Calendar Page Header */
 .calendar-page h1 {
   text-align: center;
-  color: #333;
+  color: #fff; /* White text for better contrast */
+  margin-bottom: 20px;
 }
 
+/* Calendar Container */
 .rbc-calendar {
   background-color: #f8f8f8;
   border: 1px solid #ddd;
   border-radius: 5px;
+  width: 100%;
+  max-width: 1200px; /* Center within a max width */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Add some shadow for depth */
 }
 
+/* Toolbar Styles */
 .rbc-toolbar {
   background-color: #4caf50;
   color: white;
   padding: 10px;
   border-radius: 5px 5px 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .rbc-toolbar button {
@@ -35,8 +52,21 @@
   background-color: #e8e8e8;
 }
 
+/* Event Styles */
 .rbc-event {
   padding: 5px;
   border-radius: 5px;
   font-size: 0.9em;
+  color: #fff; /* Ensure contrast for event text */
+  background-color: #4caf50; /* Default event color */
 }
+
+.rbc-event:hover {
+  opacity: 0.8; /* Slight fade on hover */
+}
+
+/* Adjust text colors for improved contrast */
+.rbc-day-bg {
+  color: #555; /* Slightly darker text in the background */
+}
+  
