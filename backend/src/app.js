@@ -48,11 +48,22 @@ const app = express();
 app.use(express.json());
 
 // CORS Configuration (allow all origins)
-app.use(cors({
-  origin: '*',  // Allow all origins
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allow methods
-  allowedHeaders: ['Content-Type', 'Authorization'], // Allow headers
-}));
+app.use(async (req, res) => {
+  res.setHeader('Access-Control-Allow-Credentials', true)
+  res.setHeader('Access-Control-Allow-Origin', '*')
+  // another common pattern
+  // res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
+  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT')
+  res.setHeader(
+    'Access-Control-Allow-Headers',
+    'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
+  )
+  if (req.method === 'OPTIONS') {
+    res.status(200).end()
+    return
+  }
+  return await fn(req, res)
+});
 
 // Routes
 app.use('/api/users', userRoutes);
