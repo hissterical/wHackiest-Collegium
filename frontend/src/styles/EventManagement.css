@@ -1,7 +1,7 @@
 /* Gradient Background */
 .event-management-container {
   min-height: 100vh; /* Ensure it covers the full viewport */
-  background: linear-gradient(135deg, #bdc3c7, #2c3e50); /* Light gray to dark gradient */
+  background: linear-gradient(135deg,#6a11cb, #2575fc); /* Light gray to dark gradient */
   padding: 20px;
   text-align: center;
   display: flex;
