@@ -7,6 +7,8 @@ import EquipmentMarketplace from './screens/EquipmentMarketplace';
 import Calendar from './screens/Calendar';
 import EventManagement from './screens/EventManagement';
 import SignUp from './screens/SignUp';
+import Profile from './screens/Profile';
+
 
 
 function App() {
@@ -20,6 +22,7 @@ function App() {
         <Route path="/calendar" element={<Calendar />} />
         <Route path="/event-management" element={<EventManagement />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/profile" element={<Profile />} />
 
       </Routes>
     </Router>

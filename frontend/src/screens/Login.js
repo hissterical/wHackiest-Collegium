@@ -87,6 +87,7 @@ const Login = () => {
           </div>
           {error && <div className="error">{error}</div>}
           <button type="submit" className="login-button">
+
             Login
           </button>
         </form>
@@ -102,3 +103,4 @@ const Login = () => {
 };
 
 export default Login;
+

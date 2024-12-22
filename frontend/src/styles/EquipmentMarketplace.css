@@ -1,17 +1,17 @@
-/* Styling for the expertise marketplace container */
-.expertise-marketplace-container {
-  min-height: 100vh;
-  background: linear-gradient(135deg, #bdc3c7, #2c3e50);
+/* Gradient for the entire container */
+.equipment-marketplace-container {
+  min-height: 100vh;  /* Ensure the gradient covers the entire screen height */
+  background: linear-gradient(135deg, #bdc3c7  , #2c3e50);  /* Blue to light gray gradient */
   padding: 20px;
   text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: flex-start;  /* Align content properly */
 }
 
-/* Button styles */
+/* Button Styles */
 button {
-  background-color: #287435;
+  background-color: #10B981;  /* Bright Blue */
   color: white;
   padding: 10px 20px;
   border: none;
@@ -21,26 +21,26 @@ button {
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: #0056b3;  /* Darker Blue on hover */
 }
 
 button.cancel {
-  background-color: #f44336;
+  background-color: #f44336;  /* Red for cancel */
 }
 
 button.cancel:hover {
-  background-color: #d32f2f;
+  background-color: #d32f2f;  /* Darker Red on hover */
 }
 
 button.add {
-  background-color: #28a745;
+  background-color: #10B981;  /* Green for adding items */
 }
 
 button.add:hover {
-  background-color: #218838;
+  background-color: #10B981;  /* Darker Green on hover */
 }
 
-/* Modal styling */
+/* Modal Styles */
 .modal-content {
   background: white;
   padding: 30px;
@@ -55,8 +55,8 @@ button.add:hover {
   color: #333;
 }
 
-/* Input field styling */
-input, textarea, select {
+/* Input Fields */
+input, textarea {
   width: 100%;
   padding: 12px;
   margin: 10px 0;
@@ -65,20 +65,20 @@ input, textarea, select {
   font-size: 16px;
 }
 
-input:focus, textarea:focus, select:focus {
-  border-color: #007bff;
+input:focus, textarea:focus {
+  border-color: #007bff;  /* Blue focus border */
   outline: none;
 }
 
-/* Requests list */
-.requests-list {
+/* Item Card Styles */
+.items-list {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
 }
 
-.request-card {
+.item-card {
   background: #ffffff;
   padding: 20px;
   border-radius: 12px;
@@ -88,22 +88,22 @@ input:focus, textarea:focus, select:focus {
   transition: transform 0.3s ease;
 }
 
-.request-card:hover {
+.item-card:hover {
   transform: translateY(-10px);
 }
 
-.request-card h3 {
-  color: #007bff;
+.item-card h3 {
+  color: #007bff;  /* Blue title */
   font-size: 20px;
 }
 
-.request-card p {
+.item-card p {
   font-size: 14px;
   color: #555;
 }
 
-.request-card button {
-  background-color: #28a745;
+.item-card button {
+  background-color: #10B981;  /* Green for contact */ 
   color: white;
   padding: 10px;
   font-size: 14px;
@@ -112,23 +112,6 @@ input:focus, textarea:focus, select:focus {
   cursor: pointer;
 }
 
-.request-card button:hover {
-  background-color: #218838;
-}
-
-/* Search input and filter styles */
-.search-input {
-  padding: 10px;
-  margin-bottom: 20px;
-  width: 300px;
-  border-radius: 5px;
-  border: 1px solid #ddd;
-}
-
-.filter-select {
-  padding: 10px;
-  margin-bottom: 20px;
-  width: 200px;
-  border-radius: 5px;
-  border: 1px solid #ddd;
+.item-card button:hover {
+  background-color: #10B981;  /* Darker Green on hover */
 }
