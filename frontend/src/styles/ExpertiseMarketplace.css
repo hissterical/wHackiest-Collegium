@@ -1,128 +1,134 @@
-/* ExpertiseMarketplace.css */
-
-.expertise-container {
+/* Styling for the expertise marketplace container */
+.expertise-marketplace-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #bdc3c7, #2c3e50);
+  padding: 20px;
+  text-align: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  margin: 20px;
+  justify-content: flex-start;
 }
 
-.add-request-button {
-  padding: 10px 20px;
-  background-color: #007bff;
+/* Button styles */
+button {
+  background-color: #287435;
   color: white;
-  font-size: 16px;
+  padding: 10px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin-bottom: 20px;
+  margin: 10px;
 }
 
-.add-request-button:hover {
+button:hover {
   background-color: #0056b3;
 }
 
-.requests-list {
-  width: 100%;
-  max-width: 800px;
+button.cancel {
+  background-color: #f44336;
 }
 
-.requests {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+button.cancel:hover {
+  background-color: #d32f2f;
+}
+
+button.add {
+  background-color: #28a745;
+}
+
+button.add:hover {
+  background-color: #218838;
+}
+
+/* Modal styling */
+.modal-content {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  width: 400px;
+  text-align: left;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.modal-content h2 {
+  text-align: center;
+  color: #333;
+}
+
+/* Input field styling */
+input, textarea, select {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: 2px solid #ddd;
+  font-size: 16px;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Requests list */
+.requests-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 20px;
 }
 
 .request-card {
-  padding: 15px;
-  background-color: #f4f4f9;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 280px;
+  text-align: left;
+  transition: transform 0.3s ease;
 }
 
 .request-card:hover {
-  background-color: #e0e0e0;
+  transform: translateY(-10px);
 }
 
-.request-detail-view {
-  margin-top: 30px;
-  padding: 20px;
-  background-color: #f4f4f9;
-  border-radius: 8px;
-  width: 80%;
+.request-card h3 {
+  color: #007bff;
+  font-size: 20px;
 }
 
-.close-detail-button {
-  padding: 5px 10px;
-  background-color: #dc3545;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.close-detail-button:hover {
-  background-color: #c82333;
-}
-
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.modal-content {
-  background-color: white;
-  padding: 20px;
-  border-radius: 10px;
-  width: 400px;
-}
-
-.input-group {
-  margin-bottom: 15px;
-}
-
-.input-group label {
-  display: block;
-  margin-bottom: 5px;
-}
-
-.input-group input,
-.input-group select,
-.input-group textarea {
-  width: 100%;
-  padding: 8px;
-  font-size: 16px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-}
-
-.error {
-  color: red;
+.request-card p {
   font-size: 14px;
-  margin-top: 10px;
+  color: #555;
 }
 
-.submit-button,
-.cancel-button {
-  padding: 10px;
-  background-color: #007bff;
+.request-card button {
+  background-color: #28a745;
   color: white;
+  padding: 10px;
+  font-size: 14px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  width: 48%;
-  margin-right: 4%;
 }
 
-.submit-button:hover,
-.cancel-button:hover {
-  background-color: #0056b3;
+.request-card button:hover {
+  background-color: #218838;
+}
+
+/* Search input and filter styles */
+.search-input {
+  padding: 10px;
+  margin-bottom: 20px;
+  width: 300px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+.filter-select {
+  padding: 10px;
+  margin-bottom: 20px;
+  width: 200px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
 }

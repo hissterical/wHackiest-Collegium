@@ -22,6 +22,7 @@ const EquipmentMarketplace = () => {
       price: 100,
     },
   ]);
+  const [searchQuery, setSearchQuery] = useState('');
   const [newItem, setNewItem] = useState({
     name: '',
     description: '',
@@ -29,7 +30,14 @@ const EquipmentMarketplace = () => {
   });
   const [showModal, setShowModal] = useState(false);
 
-  // Handle form input changes for adding a new item
+  const handleSearch = (e) => {
+    setSearchQuery(e.target.value.toLowerCase());
+  };
+
+  const filteredItems = items.filter((item) =>
+    item.name.toLowerCase().includes(searchQuery)
+  );
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setNewItem((prev) => ({
@@ -38,7 +46,6 @@ const EquipmentMarketplace = () => {
     }));
   };
 
-  // Submit new item and add it to the items list
   const handleSubmitItem = (e) => {
     e.preventDefault();
     setItems([...items, { ...newItem, id: items.length + 1 }]);
@@ -46,35 +53,41 @@ const EquipmentMarketplace = () => {
     setShowModal(false);
   };
 
-  // Open modal to add new item
   const handleOpenModal = () => {
     setShowModal(true);
   };
 
-  // Close modal without saving
   const handleCloseModal = () => {
     setShowModal(false);
-  };
-
-  const handleContactClick = (itemId) => {
-    alert(`Contacting seller of item ID: ${itemId}`);
-    // You can replace this with a real contact form or page.
   };
 
   return (
     <div className="equipment-marketplace-container">
       <h1>Equipment Marketplace</h1>
+
+      <input
+        type="text"
+        placeholder="Search items..."
+        value={searchQuery}
+        onChange={handleSearch}
+        className="search-input"
+      />
+
       <button onClick={handleOpenModal}>Add New Item</button>
 
       <div className="items-list">
-        {items.map((item) => (
-          <div key={item.id} className="item-card">
-            <h3>{item.name}</h3>
-            <p>{item.description}</p>
-            <p><strong>Price:</strong> ${item.price}</p>
-            <button onClick={() => handleContactClick(item.id)}>Contact</button>
-          </div>
-        ))}
+        {filteredItems.length > 0 ? (
+          filteredItems.map((item) => (
+            <div key={item.id} className="item-card">
+              <h3>{item.name}</h3>
+              <p>{item.description}</p>
+              <p><strong>Price:</strong> {item.price}Rs</p>
+              <button>Contact</button>
+            </div>
+          ))
+        ) : (
+          <p className="no-results">No items found</p>
+        )}
       </div>
 
       {showModal && (

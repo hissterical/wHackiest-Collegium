@@ -1,107 +1,117 @@
+/* Gradient for the entire container */
 .equipment-marketplace-container {
-    padding: 20px;
-    text-align: center;
-    background-color: #f4f4f9;
-  }
-  
-  h1 {
-    color: #333;
-  }
-  
-  button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin: 10px;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-  }
-  
-  .items-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-  }
-  
-  .item-card {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 250px;
-    text-align: left;
-  }
-  
-  .item-card h3 {
-    color: #007bff;
-    font-size: 18px;
-  }
-  
-  .item-card p {
-    font-size: 14px;
-    color: #555;
-  }
-  
-  .modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .modal-content {
-    background: white;
-    padding: 30px;
-    border-radius: 10px;
-    width: 400px;
-    text-align: left;
-  }
-  
-  .modal-content h2 {
-    text-align: center;
-    color: #333;
-  }
-  
-  .modal-content input,
-  .modal-content textarea {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-  }
-  
-  .modal-content button {
-    background-color: #007bff;
-    color: white;
-    padding: 10px;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-right: 10px;
-  }
-  
-  .modal-content button:hover {
-    background-color: #0056b3;
-  }
-  
-  .modal-content button[type="button"] {
-    background-color: #f44336;
-  }
-  
-  .modal-content button[type="button"]:hover {
-    background-color: #d32f2f;
-  }
-  
+  min-height: 100vh;  /* Ensure the gradient covers the entire screen height */
+  background: linear-gradient(135deg, #bdc3c7  , #2c3e50);  /* Blue to light gray gradient */
+  padding: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;  /* Align content properly */
+}
+
+/* Button Styles */
+button {
+  background-color: #10B981;  /* Bright Blue */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 10px;
+}
+
+button:hover {
+  background-color: #0056b3;  /* Darker Blue on hover */
+}
+
+button.cancel {
+  background-color: #f44336;  /* Red for cancel */
+}
+
+button.cancel:hover {
+  background-color: #d32f2f;  /* Darker Red on hover */
+}
+
+button.add {
+  background-color: #10B981;  /* Green for adding items */
+}
+
+button.add:hover {
+  background-color: #10B981;  /* Darker Green on hover */
+}
+
+/* Modal Styles */
+.modal-content {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  width: 400px;
+  text-align: left;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.modal-content h2 {
+  text-align: center;
+  color: #333;
+}
+
+/* Input Fields */
+input, textarea {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: 2px solid #ddd;
+  font-size: 16px;
+}
+
+input:focus, textarea:focus {
+  border-color: #007bff;  /* Blue focus border */
+  outline: none;
+}
+
+/* Item Card Styles */
+.items-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.item-card {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 280px;
+  text-align: left;
+  transition: transform 0.3s ease;
+}
+
+.item-card:hover {
+  transform: translateY(-10px);
+}
+
+.item-card h3 {
+  color: #007bff;  /* Blue title */
+  font-size: 20px;
+}
+
+.item-card p {
+  font-size: 14px;
+  color: #555;
+}
+
+.item-card button {
+  background-color: #10B981;  /* Green for contact */ 
+  color: white;
+  padding: 10px;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.item-card button:hover {
+  background-color: #10B981;  /* Darker Green on hover */
+}
