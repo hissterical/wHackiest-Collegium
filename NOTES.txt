@@ -1,0 +1,1 @@
+Currently the backend allows requests from everywhere (should add cors or smthn)
