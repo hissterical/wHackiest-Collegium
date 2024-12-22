@@ -1,15 +1,15 @@
 const express = require('express');
-const Post = require('../models/Post');
+const Event = require('../models/Event');
 
 const router = express.Router();
 
 router.post('/', async(req, res) => {
-    const {userId, title, description, tag, payment} = req.body;
+    const {title, description, location, date} = req.body;
 
     try {
-        const post = new Post({ userId, title, description, tag, payment });
-        await post.save();
-        res.status(201).json(post);
+        const event = new Event({title, description, location, date});
+        await event.save();
+        res.status(201).json(event);
     } catch (err) {
         res.status(500).json({error: err.message});
     }
@@ -17,8 +17,8 @@ router.post('/', async(req, res) => {
 
 router.get('/', async(req, res) => {
     try {
-        const posts = await Post.find();
-        res.json(posts);
+        const events = await Event.find();
+        res.json(events);
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
