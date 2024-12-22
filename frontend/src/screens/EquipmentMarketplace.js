@@ -1,41 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import '../styles/EquipmentMarketplace.css';
 
 const EquipmentMarketplace = () => {
-  const [items, setItems] = useState([
-    {
-      id: 1,
-      name: 'Scientific Calculator',
-      description: 'A scientific calculator with advanced features.',
-      price: 30,
-    },
-    {
-      id: 2,
-      name: 'Lab Coat',
-      description: 'White lab coat for science experiments.',
-      price: 50,
-    },
-    {
-      id: 3,
-      name: 'Stethoscope',
-      description: 'High-quality stethoscope for medical professionals.',
-      price: 100,
-    },
-  ]);
+  const [items, setItems] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [newItem, setNewItem] = useState({
-    name: '',
+    userId:localStorage.getItem('userId') ,
+    title: '',
     description: '',
-    price: ''
+    tag: 'equipment',
+    payment: ''
   });
   const [showModal, setShowModal] = useState(false);
+
+  const API_URL = 'https://w-hackiest-collegium-git-main-draxs-projects-939fc184.vercel.app/api/posts'; // Replace with your API endpoint
+
+  // Fetch posts from the API
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const response = await axios.get(API_URL);
+        setItems(response.data); // Assuming API returns an array of posts
+      } catch (error) {
+        console.error('Error fetching posts:', error);
+      }
+    };
+
+    fetchPosts();
+  }, []);
 
   const handleSearch = (e) => {
     setSearchQuery(e.target.value.toLowerCase());
   };
 
   const filteredItems = items.filter((item) =>
-    item.name.toLowerCase().includes(searchQuery)
+    item.title.toLowerCase().includes(searchQuery)
   );
 
   const handleChange = (e) => {
@@ -46,12 +46,30 @@ const EquipmentMarketplace = () => {
     }));
   };
 
-  const handleSubmitItem = (e) => {
-    e.preventDefault();
-    setItems([...items, { ...newItem, id: items.length + 1 }]);
-    setNewItem({ name: '', description: '', price: '' });
-    setShowModal(false);
+  const handleSubmitItem = async (e) => {
+    e.preventDefault(); // Prevent default form submission behavior.
+  
+    try {
+      // Send the new post to the API
+      const response = await axios.post("https://w-hackiest-collegium-git-main-draxs-projects-939fc184.vercel.app/api/posts", newItem);
+  
+      // Update the state with the new item from the response
+      setItems((prevItems) => [...prevItems, response.data]);
+  
+      // Reset the form and close the modal
+      setNewItem({
+        userId:localStorage.getItem('userId') ,
+        title: '',
+        description: '',
+        tag: 'equipment',
+        payment: ''
+      });
+      setShowModal(false);
+    } catch (error) {
+      console.error('Error posting new item:', error); // Log any errors
+    }
   };
+  
 
   const handleOpenModal = () => {
     setShowModal(true);
@@ -78,10 +96,10 @@ const EquipmentMarketplace = () => {
       <div className="items-list">
         {filteredItems.length > 0 ? (
           filteredItems.map((item) => (
-            <div key={item.id} className="item-card">
-              <h3>{item.name}</h3>
+            <div key={item._id} className="item-card">
+              <h3>{item.title}</h3>
               <p>{item.description}</p>
-              <p><strong>Price:</strong> {item.price}Rs</p>
+              <p><strong>Payment:</strong> {item.payment}</p>
               <button>Contact</button>
             </div>
           ))
@@ -97,9 +115,9 @@ const EquipmentMarketplace = () => {
             <form onSubmit={handleSubmitItem}>
               <input
                 type="text"
-                name="name"
-                placeholder="Item Name"
-                value={newItem.name}
+                name="title"
+                placeholder="Item Title"
+                value={newItem.title}
                 onChange={handleChange}
                 required
               />
@@ -111,10 +129,10 @@ const EquipmentMarketplace = () => {
                 required
               />
               <input
-                type="number"
-                name="price"
-                placeholder="Price"
-                value={newItem.price}
+                type="text"
+                name="payment"
+                placeholder="Payment"
+                value={newItem.payment}
                 onChange={handleChange}
                 required
               />
