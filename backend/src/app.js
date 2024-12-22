@@ -33,7 +33,6 @@
 //     console.log(`Server running on port ${PORT}`)
 // });
 
-
 require('dotenv').config();
 const express = require('express');
 const connectDB = require('./config/db');
@@ -45,7 +44,6 @@ const cors = require('cors');
 connectDB();
 
 const app = express();
-app.use(express.json());
 
 // CORS Configuration (allow all origins)
 app.use(cors({
@@ -53,6 +51,11 @@ app.use(cors({
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allow methods
   allowedHeaders: ['Content-Type', 'Authorization'], // Allow headers
 }));
+
+// This will handle preflight OPTIONS requests (if the browser sends them)
+app.options('*', cors());  // Allow preflight requests for all routes
+
+app.use(express.json());
 
 // Routes
 app.use('/api/users', userRoutes);
@@ -68,4 +71,3 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
-
